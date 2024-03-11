@@ -2,15 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <groupId>org.camunda.community</groupId>
-    <artifactId>community-hub-release-parent</artifactId>
-    <version>1.4.1</version>
-    <relativePath />
-  </parent>
-
-  <artifactId>camunda-8-benchmark</artifactId>
+  <groupId>p0l19</groupId>
+  <artifactId>camunda-8-benchmark-rework</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
   <licenses>
@@ -34,10 +27,9 @@
       <artifactId>guava</artifactId>
       <version>33.0.0-jre</version>
     </dependency>
-
     <dependency>
-      <groupId>io.camunda</groupId>
-      <artifactId>spring-zeebe-starter</artifactId>
+      <groupId>io.camunda.spring</groupId>
+      <artifactId>spring-boot-starter-camunda</artifactId>
       <version>${camunda.version}</version>
     </dependency>
 
@@ -102,13 +94,6 @@
         <version>3.0</version>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <configuration>
-          <mainClass>org.camunda.community.benchmarks.BenchmarkApplication</mainClass>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring.version}</version>
@@ -119,6 +104,15 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version> <!-- Use an appropriate version of the plugin -->
+        <configuration>
+          <source>17</source> <!-- Set source version to 17 -->
+          <target>17</target> <!-- Set target version to 17 -->
+        </configuration>
       </plugin>
     </plugins>
   </build>
