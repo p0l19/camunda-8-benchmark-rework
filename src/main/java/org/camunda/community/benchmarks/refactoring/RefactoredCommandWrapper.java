@@ -1,7 +1,6 @@
 package org.camunda.community.benchmarks.refactoring;
 
 import io.camunda.zeebe.client.api.command.FinalCommandStep;
-import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.client.api.worker.BackoffSupplier;
 import io.camunda.zeebe.spring.client.jobhandling.CommandWrapper;
 import io.camunda.zeebe.spring.client.jobhandling.DefaultCommandExceptionHandlingStrategy;
@@ -18,7 +17,7 @@ public class RefactoredCommandWrapper extends CommandWrapper  {
         private FinalCommandStep<Void> command;
         private long deadline;
         private String entityLogInfo;
-        private DefaultCommandExceptionHandlingStrategy commandExceptionHandlingStrategy;
+        private final DefaultCommandExceptionHandlingStrategy commandExceptionHandlingStrategy;
         private long currentRetryDelay = 50L;
         private int invocationCounter = 0;
         private int maxRetries = 20;

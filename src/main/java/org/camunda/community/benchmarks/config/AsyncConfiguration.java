@@ -12,6 +12,8 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 @Configuration
 public class AsyncConfiguration {
@@ -55,5 +57,10 @@ public class AsyncConfiguration {
         scheduler.setThreadNamePrefix("ThreadPoolTaskScheduler-");
         scheduler.initialize();
         return scheduler;
+    }
+
+    @Bean
+    public ScheduledExecutorService scheduledExecutorService() {
+        return Executors.newScheduledThreadPool(5);
     }
 }

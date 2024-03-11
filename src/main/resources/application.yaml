@@ -1,0 +1,57 @@
+zeebe:
+  client:
+    worker:
+      max-jobs-active: 2000
+      threads: 100
+    broker:
+      gateway-address: 127.0.0.1:26500
+    security:
+      plaintext: true
+    connection-mode: ADDRESS
+
+server:
+  port: 8088
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: "*"
+
+# Main benchmark configurations
+######################
+benchmark:
+  startProcesses: true
+  startPiPerSecond: 5
+  taskCompletionDelay: 200
+  bpmnProcessId: benchmark
+  startWorkers: true
+  jobType: benchmark-task
+  multipleJobTypes: 0
+  warmupPhaseDurationMillis: 300000 # 5 minutes warmup: 5*60*1000
+  startRateAdjustmentStrategy: none
+  payloadPath: classpath:bpmn/typical_payload.json
+  autoDeployProcess: true
+  bpmnResource: classpath:bpmn/typical_process.bpmn
+  starterId: benchmarkStarter1
+  # when 0, use the default Exponential Backoff Supplier. Otherwise, specify fixed number of millis backoff.
+  fixedBackOffDelay: 0
+  maxBackpressurePercentage: 10.0
+  startPiReduceFactor: 0.1
+  startPiIncreaseFactor: 0.4
+# BPMN Message Scenario
+########################
+# bpmnResource: classpath:bpmn/msg_process.bpmn
+# messageScenario: classpath:bpmn/sample-msg-scenario.json
+# messagesTtl: 60
+# messagesScenariosPerSecond: 10
+# delayBetweenMessages: 10000
+# messagesLoadDuration: 1000
+
+async:
+  corePoolSize: 5
+  maxPoolSize: 100
+  queueCapacity: 1000
+
+scheduler:
+  poolSize: 10
+

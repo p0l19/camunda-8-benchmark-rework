@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 import org.apache.commons.lang.SerializationUtils;
 import org.camunda.community.benchmarks.config.BenchmarkConfiguration;
@@ -33,11 +33,11 @@ public class StartMessageScenarioScheduler {
 
   private static final Logger LOG = LoggerFactory.getLogger(StartMessageScenarioScheduler.class);
 
-  private BenchmarkConfiguration config;
+  private final BenchmarkConfiguration config;
 
-  private ZeebeClient client;
+  private final ZeebeClient client;
 
-  private TaskScheduler taskScheduler;
+  private final TaskScheduler taskScheduler;
 
 
   private MessagesScenario scenario;
@@ -118,7 +118,7 @@ public class StartMessageScenarioScheduler {
   }
 
   class MessageSender implements Runnable{
-    private MessagesScenario scenario;
+    private final MessagesScenario scenario;
 
     public MessageSender(MessagesScenario scenario){
       this.scenario = scenario;

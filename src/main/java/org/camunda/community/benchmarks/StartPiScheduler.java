@@ -2,8 +2,7 @@ package org.camunda.community.benchmarks;
 
 import java.time.Instant;
 
-import javax.annotation.PostConstruct;
-
+import jakarta.annotation.PostConstruct;
 import org.camunda.community.benchmarks.config.BenchmarkConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,7 +104,7 @@ public class StartPiScheduler {
     }
 
     @Async
-    private void startProcessInstances(long batchSize) {
+    protected void startProcessInstances(long batchSize) {
         for (int i = 0; i < batchSize; i++) {
             executor.startProcessInstance();
             stats.incStartedProcessInstances();

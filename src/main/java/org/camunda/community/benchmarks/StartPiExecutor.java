@@ -1,21 +1,23 @@
 package org.camunda.community.benchmarks;
 
-import com.google.common.util.concurrent.UncheckedExecutionException;
 import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.client.ZeebeClientConfiguration;
-import io.camunda.zeebe.client.api.JsonMapper;
 import io.camunda.zeebe.client.api.command.FinalCommandStep;
 import io.camunda.zeebe.spring.client.jobhandling.CommandWrapper;
+import jakarta.annotation.PostConstruct;
 import org.camunda.community.benchmarks.config.BenchmarkConfiguration;
 import org.camunda.community.benchmarks.refactoring.RefactoredCommandWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.Instant;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @Component
 public class StartPiExecutor {
@@ -45,8 +47,7 @@ public class StartPiExecutor {
     }
 
     public void startProcessInstance() {
-        HashMap<Object, Object> variables = new HashMap<>();
-        variables.putAll(this.benchmarkPayload);
+        HashMap<Object, Object> variables = new HashMap<>(this.benchmarkPayload);
         variables.put(BENCHMARK_START_DATE_MILLIS, Instant.now().toEpochMilli());
         variables.put(BENCHMARK_STARTER_ID, config.getStarterId());
 
