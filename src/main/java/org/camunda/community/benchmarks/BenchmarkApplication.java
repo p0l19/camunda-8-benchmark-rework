@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
-@Deployment(resources = "classpath:bpmn/typical_process.bpmn")
+@Deployment(resources = "classpath:bpmn/*.bpmn")
 class BenchmarkApplication  {
 
     public static void main(String[] args) {

@@ -12,3 +12,4 @@ COPY --from=builder /usr/src/app/dependencies/ ./
 COPY --from=builder /usr/src/app/snapshot-dependencies/ ./
 COPY --from=builder /usr/src/app/spring-boot-loader/ ./
 COPY --from=builder /usr/src/app/application/ ./
+EXPOSE 8080
